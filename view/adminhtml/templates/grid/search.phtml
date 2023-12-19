@@ -1,0 +1,22 @@
+<?php
+declare(strict_types=1);
+
+/** @var Grid $magewire */
+
+use Magewirephp\MagewireBackendGrid\Magewire\Grid;
+?>
+<div class="data-grid-search-control-wrap">
+    <label class="data-grid-search-label" title="Search" for="grid-search">
+        <span><?= __('Search') ?></span>
+    </label>
+    <input
+        wire:model.lazy="search"
+        id="grid-search"
+        class="admin__control-text data-grid-search-control"
+        type="text"
+        placeholder="<?= __('Search by keyword') ?>"
+        aria-label="<?= __('Search by keyword') ?>"/>
+    <button class="action-submit" type="button" aria-label="<?= __('Search' )?>">
+        <span><?= __('Search' )?></span>
+    </button>
+</div>

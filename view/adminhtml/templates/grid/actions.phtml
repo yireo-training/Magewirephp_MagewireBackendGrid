@@ -1,0 +1,18 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Magewirephp\MagewireBackendGrid\Magewire\Grid;
+
+/** @var Template $block */
+/** @var Grid $magewire */
+?>
+<div class="page-main-actions">
+    <div class="page-actions">
+        <div class="page-actions-inner">
+            <div class="page-actions-buttons">
+                <?= $block->getChildHtml('buttons') ?>
+            </div>
+        </div>
+    </div>
+</div>

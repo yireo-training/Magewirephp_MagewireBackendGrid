@@ -1,0 +1,12 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Magewirephp\MagewireBackendGrid\Magewire\Grid\Records;
+
+/** @var Template $block */
+/** @var Records $magewire */
+?>
+<div class="admin__control-support-text">
+    <?= $magewire->records ?> <?= __('records found') ?>
+</div>

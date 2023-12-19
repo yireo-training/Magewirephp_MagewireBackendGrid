@@ -3,25 +3,27 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Magewirephp\MagewireBackendGrid\Magewire\Grid;
+use Magewirephp\MagewireBackendGrid\Magewire\Grid\Pagination;
 
 /** @var Template $block */
-/** @var Grid $magewire */
+/** @var Pagination $magewire */
 $limits = [20, 30, 50, 100, 200]; // @todo: Move this into a viewModel
+$page = $magewire->page + 1;
 ?>
 <div class="admin__data-grid-pager-wrap">
     <div class="selectmenu">
         <div class="selectmenu-value">
-            <input type="text" aria-labelledby="per-page-text" id="product_listing.product_listing.listing_top.listing_paging_sizes">
+            <input wire:model="limit" type="text" aria-labelledby="per-page-text" id="product_listing.product_listing.listing_top.listing_paging_sizes">
         </div>
-        <button class="selectmenu-toggle" type="button" aria-labelledby="per-page-text select-button-text">
+        <button wire:click="$toggle('showLimitMenu')" class="selectmenu-toggle" type="button" aria-labelledby="per-page-text select-button-text">
             <span id="select-button-text"><?= __('Select') ?></span>
         </button>
-        <div class="selectmenu-items">
+        <div class="selectmenu-items" <?php if ($magewire->showLimitMenu): ?>style="display:block;"<?php endif; ?>>
             <ul>
                 <?php foreach($limits as $limit): ?>
                 <li>
                     <div class="selectmenu-item">
-                        <button class="selectmenu-item-action" type="button"><?= $limit ?></button>
+                        <button wire:click="$set('limit', <?= $limit ?>)" class="selectmenu-item-action" type="button"><?= $limit ?></button>
                     </div>
                 </li>
                 <?php endforeach; ?>
@@ -33,7 +35,7 @@ $limits = [20, 30, 50, 100, 200]; // @todo: Move this into a viewModel
     <div class="admin__data-grid-pager">
         <button wire:click="decrementPage" class="action-previous" type="button" title="<?= __('Previous Page') ?>" <?= ($magewire->page < 2) ? 'disabled' : '' ?>></button>
 
-        <input wire:model="page" class="admin__control-text" type="number" id="current_page" value="<?= $magewire->page ?>"/>
+        <input wire:model="page" class="admin__control-text" type="number" id="current_page" />
         <label class="admin__control-support-text" for="current_page">of <?= $magewire->totalPages ?> pages</label>
 
         <button wire:click="incrementPage" class="action-next" type="button" title="<?= __('Next Page') ?>" <?= ($magewire->page >= $magewire->totalPages) ? 'disabled' : '' ?>></button>

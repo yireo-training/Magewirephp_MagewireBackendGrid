@@ -2,14 +2,8 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Magewirephp\MagewireBackendGrid\Grid\DataProvider\GridDataProviderInterface;
-use Magewirephp\MagewireBackendGrid\Magewire\Grid;
 
 /** @var Template $block */
-/** @var Grid $magewire */
-/** @var GridDataProviderInterface $gridDataProvider */
-$gridDataProvider = $block->getGridDataProvider();
-$magewire->setGridDataProvider($gridDataProvider);
 ?>
 
 <div class="grid">
@@ -25,9 +19,7 @@ $magewire->setGridDataProvider($gridDataProvider);
                         <?= $block->getChildHtml('pagination') ?>
                         <?= $block->getChildHtml('grid-actions') ?>
                         <?= $block->getChildHtml('filters-actions') ?>
-                        <div class="admin__control-support-text">
-                            <?= $magewire->totalItems ?> <?= __('records found') ?>
-                        </div>
+                        <?= $block->getChildHtml('records') ?>
                     </div>
                 </div>
 
@@ -39,35 +31,8 @@ $magewire->setGridDataProvider($gridDataProvider);
                     </div>
                 </div>
                 -->
-
-                <div class="admin__data-grid-wrap" data-role="grid-wrapper">
-                    <table class="data-grid" data-role="grid">
-                        <thead>
-                        <tr>
-                            <?php foreach ($gridDataProvider->getColumns() as $code => $label): ?>
-                                <th class="data-grid-th">
-                                    <span class="data-grid-cell-content"><?= __($label) ?></span>
-                                </th>
-                            <?php endforeach; ?>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach($gridDataProvider->getItems() as $item): ?>
-                        <tr class="data-row">
-                            <?php foreach ($gridDataProvider->getColumns() as $code => $label): ?>
-                            <td class="data-grid-cell">
-                                <div class="data-grid-cell-content">
-                                    <?= $item->getData($code) ?>
-                                </div>
-                            </td>
-                            <?php endforeach; ?>
-                        </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-
-
+                
+                <?= $block->getChildHtml('data') ?>
             </div>
         </div>
     </div>

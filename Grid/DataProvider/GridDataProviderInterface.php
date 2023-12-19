@@ -25,4 +25,9 @@ interface GridDataProviderInterface extends ArgumentInterface
      * @return int
      */
     public function getTotalPages(int $limit): int;
+    
+    /**
+     * @return array
+     */
+    public function getColumns(): array;
 }

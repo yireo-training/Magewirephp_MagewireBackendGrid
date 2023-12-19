@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
+use Magewirephp\MagewireBackendGrid\Magewire\Grid\Spinner;
 
-/** @var Grid $magewire */
+/** @var Spinner $magewire */
 
-use Magewirephp\MagewireBackendGrid\Magewire\Grid;
 ?>
-<div data-role="spinner" class="admin__data-grid-loading-mask" style="display: <?= $magewire->spinner ? 'block' : 'none' ?>">
+<div data-role="spinner" class="admin__data-grid-loading-mask" style="display: <?= $magewire->loading ? 'block' : 'none' ?>">
     <div class="spinner">
         <span></span>
     </div>

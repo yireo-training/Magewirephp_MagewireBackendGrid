@@ -4,20 +4,56 @@
     <body>
         <referenceContainer name="content">
             <block name="magewire_grid" template="Magewirephp_MagewireBackendGrid::grid.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">Magewirephp\MagewireBackendGrid\Magewire\Grid</argument>
-                </arguments>
+                <block name="magewire_grid_data" as="data" template="Magewirephp_MagewireBackendGrid::grid/data.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Magewirephp\MagewireBackendGrid\Magewire\Grid
+                        </argument>
+                    </arguments>
+                </block>
 
                 <block name="magewire_grid_actions" as="actions"
-                       template="Magewirephp_MagewireBackendGrid::grid/actions.phtml"/>
+                       template="Magewirephp_MagewireBackendGrid::grid/actions.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Magewirephp\MagewireBackendGrid\Magewire\Grid\Actions
+                        </argument>
+                    </arguments>
+                </block>
+
                 <block name="magewire_grid_search" as="search"
-                       template="Magewirephp_MagewireBackendGrid::grid/search.phtml"/>
+                       template="Magewirephp_MagewireBackendGrid::grid/search.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Magewirephp\MagewireBackendGrid\Magewire\Grid\Search
+                        </argument>
+                    </arguments>
+                </block>
+
                 <block name="magewire_grid_spinner" as="spinner"
-                       template="Magewirephp_MagewireBackendGrid::grid/spinner.phtml"/>
+                       template="Magewirephp_MagewireBackendGrid::grid/spinner.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Magewirephp\MagewireBackendGrid\Magewire\Grid\Spinner
+                        </argument>
+                    </arguments>
+                </block>
+
                 <block name="magewire_grid_pagination" as="pagination"
                        template="Magewirephp_MagewireBackendGrid::grid/pagination.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">Magewirephp\MagewireBackendGrid\Magewire\Grid\Pagination</argument>
+                        <argument name="magewire" xsi:type="object">
+                            Magewirephp\MagewireBackendGrid\Magewire\Grid\Pagination
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block name="magewire_grid_records" as="records"
+                       template="Magewirephp_MagewireBackendGrid::grid/records.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Magewirephp\MagewireBackendGrid\Magewire\Grid\Records
+                        </argument>
                     </arguments>
                 </block>
             </block>

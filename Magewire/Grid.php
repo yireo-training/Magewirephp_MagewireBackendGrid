@@ -21,35 +21,24 @@ class Grid extends Component
         $this->gridDataProvider = $gridDataProvider;
     }
 
-    public function mount(): void
+    public function hydrate(): void
     {
-        $this->reload();
+        $this->loadData();
     }
 
-    private function reload()
+    private function loadData()
     {
         if ($this->gridDataProvider instanceof GridDataProviderInterface) {
             $this->items = $this->gridDataProvider->getItems($this->page - 1, $this->limit, $this->search);
             $this->totalPages = $this->gridDataProvider->getTotalPages($this->limit);
             $this->totalItems = $this->gridDataProvider->getTotalItems();
+            $this->emit('grid_data_provider_change', $this);
         }
-    }
-
-    public function decrementPage()
-    {
-        $this->page--;
-        $this->reload();
-    }
-
-    public function incrementPage()
-    {
-        $this->page++;
-        $this->reload();
     }
 
     public function updatedSearch(string $search)
     {
-        $this->reload();
+        $this->loadData();
         return $search;
     }
 }

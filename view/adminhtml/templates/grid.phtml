@@ -4,13 +4,8 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Magewirephp\MagewireBackendGrid\Grid\DataProvider\GridDataProviderInterface;
 use Magewirephp\MagewireBackendGrid\Magewire\Grid;
-use Magewirephp\MagewireBackendGrid\ViewModel\BlockRenderer;
 
 /** @var Template $block */
-/** @var BlockRenderer $renderer */
-$renderer = $block->getBlockRenderer();
-$renderer->setBlock($block);
-
 /** @var Grid $magewire */
 /** @var GridDataProviderInterface $gridDataProvider */
 $gridDataProvider = $block->getGridDataProvider();
@@ -18,18 +13,18 @@ $magewire->setGridDataProvider($gridDataProvider);
 ?>
 
 <div class="grid">
-    <?= $renderer->getChildHtml('actions') ?>
+    <?= $block->getChildHtml('actions') ?>
     <div class="page-columns">
         <div class="main-col">
             <div class="admin__data-grid-outer-wrap">
-                <?= $renderer->getChildHtml('spinner') ?>
+                <?= $block->getChildHtml('spinner') ?>
 
                 <div class="admin__data-grid-header">
                     <div class="admin__data-grid-header-row">
-                        <?= $renderer->getChildHtml('search') ?>
-                        <?= $renderer->getChildHtml('pagination') ?>
-                        <?= $renderer->getChildHtml('grid-actions') ?>
-                        <?= $renderer->getChildHtml('filters-actions') ?>
+                        <?= $block->getChildHtml('search') ?>
+                        <?= $block->getChildHtml('pagination') ?>
+                        <?= $block->getChildHtml('grid-actions') ?>
+                        <?= $block->getChildHtml('filters-actions') ?>
                         <div class="admin__control-support-text">
                             <?= $magewire->totalItems ?> <?= __('records found') ?>
                         </div>

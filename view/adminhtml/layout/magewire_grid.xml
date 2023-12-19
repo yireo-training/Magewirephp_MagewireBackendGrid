@@ -6,7 +6,6 @@
             <block name="magewire_grid" template="Magewirephp_MagewireBackendGrid::grid.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Magewirephp\MagewireBackendGrid\Magewire\Grid</argument>
-                    <argument name="block_renderer" xsi:type="object">Magewirephp\MagewireBackendGrid\ViewModel\BlockRenderer</argument>
                 </arguments>
 
                 <block name="magewire_grid_actions" as="actions"
@@ -16,7 +15,11 @@
                 <block name="magewire_grid_spinner" as="spinner"
                        template="Magewirephp_MagewireBackendGrid::grid/spinner.phtml"/>
                 <block name="magewire_grid_pagination" as="pagination"
-                       template="Magewirephp_MagewireBackendGrid::grid/pagination.phtml"/>
+                       template="Magewirephp_MagewireBackendGrid::grid/pagination.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">Magewirephp\MagewireBackendGrid\Magewire\Grid\Pagination</argument>
+                    </arguments>
+                </block>
             </block>
         </referenceContainer>
     </body>

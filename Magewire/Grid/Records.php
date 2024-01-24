@@ -19,13 +19,13 @@ class Records extends Component
     ) {
     }
     
-    public function booted()
+    public function boot()
     {
-        $this->totalItems = $this->state->getTotalItems();
+        $this->records = $this->state->getTotalItems();
     }
     
-    public function gridStateChange(array $state)
+    public function gridStateChange()
     {
-        $this->records = $state['totalItems'];
+        $this->records = $this->state->getTotalItems();
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+    <type name="Magewirephp\Magewire\Model\ComponentManager">
+        <arguments>
+            <argument name="hydrationPool" xsi:type="array">
+                <item name="dataProviderHydrator" xsi:type="array">
+                    <item name="class" xsi:type="object">Magewirephp\MagewireBackendGrid\Magewire\Hydrator\DataProviderHydrator</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

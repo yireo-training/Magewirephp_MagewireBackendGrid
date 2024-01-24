@@ -2,20 +2,19 @@
 
 namespace Magewirephp\MagewireBackendGrid\Magewire\Grid;
 
-use Magento\Framework\Event\Observer;
 use Magewirephp\Magewire\Component;
 use Magewirephp\MagewireBackendGrid\Grid\State;
 
 class Pagination extends Component
 {
-    public int $page = 0;
-    public int $limit = 0;
+    public $page = 0;
+    public $limit = 0;
     public int $totalPages = 0;
     public int $totalItems = 0;
     public bool $showLimitMenu = false;
 
     protected $listeners = [
-        'grid_state_change' => 'gridStateChange'
+        'grid_state_change' => 'onGridStateChange'
     ];
     
     public function __construct(
@@ -23,34 +22,62 @@ class Pagination extends Component
     ) {
     }
     
-    public function booted()
+    public function boot()
     {
-        $this->page = ($this->state->getPage() + 1);
+        $this->page = $this->state->getPage();
         $this->limit = $this->state->getLimit();
         $this->totalPages = $this->state->getTotalPages();
         $this->totalItems = $this->state->getTotalItems();
     }
     
-    public function gridStateChange(array $state)
+    public function onGridStateChange()
     {
-        $this->limit = $state['limit'];
-        $this->totalPages = $state['totalPages'];
-        $this->totalItems = $state['totalItems'];
+        $this->page = $this->state->getPage();
+        $this->limit = $this->state->getLimit();
+        $this->totalPages = $this->state->getTotalPages();
+        $this->totalItems = $this->state->getTotalItems();
     }
 
     public function decrementPage()
     {
-        $this->page--;
+        $page = $this->state->getPage();
+        $page--;
+        $this->changePage($page);
     }
 
     public function incrementPage()
     {
-        $this->page++;
+        $page = $this->state->getPage();
+        $page++;
+        $this->changePage($page);
     }
     
-    public function updatingLimit(string $limit)
+    public function updatingPage(string $page)
+    {
+        $this->changePage($page);
+        return $page;
+    }
+    
+    public function updatingLimit($limit)
     {
         $this->showLimitMenu = false;
+        $this->changeLimit($limit);
         return (int)$limit;
+    }
+    
+    private function changePage($page)
+    {
+        $page = (int)$page;
+        $this->page = $page;
+        $this->state->setPage($page);
+        $this->emit('grid_state_change');
+    }
+    
+    private function changeLimit($limit)
+    {
+        $limit = (int)$limit;
+        $this->limit = $limit;
+        $this->state->setLimit($limit);
+        $this->emit('grid_state_change');
     }
 }

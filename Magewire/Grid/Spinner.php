@@ -18,6 +18,11 @@ class Spinner extends Component
     ) {
     }
     
+    public function boot(): void
+    {
+        $this->loading = $this->state->isLoading();
+    }
+    
     public function gridStateChange()
     {
         $this->loading = $this->state->isLoading();

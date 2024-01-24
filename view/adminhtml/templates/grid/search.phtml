@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-/** @var Grid $magewire */
+use Magewirephp\MagewireBackendGrid\Magewire\Grid\Search;
 
-use Magewirephp\MagewireBackendGrid\Magewire\Grid;
+/** @var Search $magewire */
 ?>
 <div class="data-grid-search-control-wrap">
     <label class="data-grid-search-label" title="Search" for="grid-search">
@@ -15,7 +15,9 @@ use Magewirephp\MagewireBackendGrid\Magewire\Grid;
         class="admin__control-text data-grid-search-control"
         type="text"
         placeholder="<?= __('Search by keyword') ?>"
-        aria-label="<?= __('Search by keyword') ?>"/>
+        aria-label="<?= __('Search by keyword') ?>"
+        value="<?= $magewire->search ?>"
+    />
     <button class="action-submit" type="button" aria-label="<?= __('Search' )?>">
         <span><?= __('Search' )?></span>
     </button>

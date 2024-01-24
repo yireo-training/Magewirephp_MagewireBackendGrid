@@ -7,7 +7,7 @@ use Magewirephp\MagewireBackendGrid\Magewire\Grid\Pagination;
 
 /** @var Template $block */
 /** @var Pagination $magewire */
-$limits = [20, 30, 50, 100, 200]; // @todo: Move this into a viewModel
+$limits = [5, 10, 20, 30, 50, 100, 200]; // @todo: Move this into a viewModel
 $page = $magewire->page + 1;
 ?>
 <div class="admin__data-grid-pager-wrap">
@@ -23,7 +23,7 @@ $page = $magewire->page + 1;
                 <?php foreach($limits as $limit): ?>
                 <li>
                     <div class="selectmenu-item">
-                        <button wire:click="$set('limit', <?= $limit ?>)" class="selectmenu-item-action" type="button"><?= $limit ?></button>
+                        <button wire:click="updatingLimit(<?= $limit ?>)" class="selectmenu-item-action" type="button"><?= $limit ?></button>
                     </div>
                 </li>
                 <?php endforeach; ?>

@@ -13,7 +13,7 @@ class Grid extends Component
     private array $columns = [];
     
     protected $listeners = [
-        'grid_search' => 'onGridSearch'
+        'grid_state_change' => 'onGridStateChange'
     ];
     
     public function __construct(
@@ -32,18 +32,16 @@ class Grid extends Component
         return $this->gridDataProvider;
     }
     
-    public function onGridSearch()
+    public function onGridStateChange()
     {
         //$this->loadProvided();
     }
     
     private function loadProvided()
     {
+        $this->gridDataProvider->setState($this->state);
         $this->items = $this->gridDataProvider->getItems();
         $this->columns = $this->gridDataProvider->getColumns();
-        
-        $this->state->setTotalItems($this->gridDataProvider->getTotalItems());
-        $this->state->setTotalPages($this->gridDataProvider->getTotalPages($this->state->getLimit()));
         $this->emit('grid_state_change', $this->state->toArray());
     }
     

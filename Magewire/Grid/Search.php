@@ -14,10 +14,15 @@ class Search extends Component
     ) {
     }
     
+    public function boot(): void
+    {
+        $this->search = $this->state->getSearch();
+    }
+    
     public function updatedSearch(string $value)
     {
         $this->state->setSearch($value);
-        $this->emit('grid_search');
+        $this->emit('grid_state_change');
         return $value;
     }
 }

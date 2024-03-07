@@ -9,6 +9,7 @@ use Magewirephp\MagewireBackendGrid\Grid\State;
 
 class Grid extends Component
 {
+    private ?GridDataProviderInterface $gridDataProvider = null;
     private array $items = [];
     private array $columns = [];
     
@@ -17,19 +18,24 @@ class Grid extends Component
     ];
     
     public function __construct(
-        private GridDataProviderInterface $gridDataProvider,
         private State $state
     ) {
+    }
+    
+    public function setGridDataProvider(GridDataProviderInterface $gridDataProvider)
+    {
+        $this->gridDataProvider = $gridDataProvider;
+    }
+    
+    public function hydrate(): void
+    {
+        $this->gridDataProvider?->setState($this->state);
+        $this->gridDataProvider?->getItems();
     }
     
     public function boot(): void
     {
         $this->loadProvided();
-    }
-    
-    public function getGridDataProvider(): GridDataProviderInterface
-    {
-        return $this->gridDataProvider;
     }
     
     public function onGridStateChange()
@@ -39,6 +45,10 @@ class Grid extends Component
     
     private function loadProvided()
     {
+        if (!$this->gridDataProvider) {
+            return;
+        }
+        
         $this->gridDataProvider->setState($this->state);
         $this->items = $this->gridDataProvider->getItems();
         $this->columns = $this->gridDataProvider->getColumns();

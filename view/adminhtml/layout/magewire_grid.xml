@@ -6,9 +6,7 @@
             <block name="magewire_grid" template="Magewirephp_MagewireBackendGrid::grid.phtml">
                 <block name="magewire_grid_data" as="data" template="Magewirephp_MagewireBackendGrid::grid/data.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Magewirephp\MagewireBackendGrid\Magewire\Grid
-                        </argument>
+                        <argument name="magewire" xsi:type="object">Magewirephp\MagewireBackendGrid\Magewire\Grid</argument>
                     </arguments>
                 </block>
 

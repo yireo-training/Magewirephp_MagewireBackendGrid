@@ -2,10 +2,12 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Magewirephp\MagewireBackendGrid\Grid\DataProvider\GridDataProviderInterface;
 
 /** @var Template $block */
+/** @var GridDataProviderInterface $gridDataProvider */
+$gridDataProvider = $block->getData('dataProvider');
 ?>
-
 <div class="grid">
     <?= $block->getChildHtml('actions') ?>
     <div class="page-columns">
@@ -32,7 +34,9 @@ use Magento\Framework\View\Element\Template;
                 </div>
                 -->
                 
-                <?= $block->getChildHtml('data') ?>
+                <?= $block->getChildBlock('data')->setData([
+                        'dataProvider' => $gridDataProvider,
+                ])->toHtml() ?>
             </div>
         </div>
     </div>
